@@ -20,14 +20,14 @@ hero:
       link: https://github.com/jschatz1/howth
 
 features:
-  - title: 34ms Cold Transpile
-    details: Transpile 203 TypeScript files cold in 34ms. Warm builds in 3.6ms. Faster than esbuild, swc, and tsc.
+  - title: 1.2ms Cold Transpile
+    details: Transpile TypeScript files cold in 1.2ms. Warm rebuilds in 0.1ms. 780x faster than tsc.
+  - title: 8.7x Faster Tests
+    details: Run 120 tests in 19ms. 8.7x faster than node --test, on par with bun. Warm Node worker pool with SWC transpilation.
   - title: Bundler with Tree Shaking
     details: Dead code elimination, code splitting on dynamic imports, CSS bundling with minification, and a Rollup-compatible plugin system.
   - title: Dev Server + HMR
     details: Built-in dev server with hot module replacement. See changes instantly during development.
-  - title: Watch Mode
-    details: Transpile-only by default for instant feedback. Type checking is opt-in with --watch typecheck.
   - title: SWC Backend
     details: Uses SWC for transpilation. Rust-native, no Node.js overhead. Content-based caching with parallel file hashing.
   - title: Node.js Compatible
@@ -36,14 +36,22 @@ features:
 
 ## Benchmarks
 
-Transpiling 203 TypeScript files (Apple M3 Pro):
+### Transpile (Apple M3 Pro)
 
-| Tool | Cold | Warm |
-|---|---|---|
-| **howth** | **34ms** | **3.6ms** |
-| esbuild | 40ms | - |
-| swc | 107ms | - |
-| tsc | 515ms | - |
+| Tool | Cold | Warm | Peak RSS |
+|---|---|---|---|
+| **howth** | **1.2ms** | **0.1ms** | **8.2MB** |
+| tsc --noEmit | 975ms | - | 143MB |
+
+### Test Runner (15 files, 120 tests)
+
+| Tool | Median | p95 | Peak RSS |
+|---|---|---|---|
+| **howth** | **19ms** | **20ms** | - |
+| bun test | 20ms | 25ms | 56.8MB |
+| node --test | 163ms | 189ms | 56.8MB |
+
+howth is **8.7x faster** than node and **1.05x faster** than bun.
 
 ## Quick Start
 
