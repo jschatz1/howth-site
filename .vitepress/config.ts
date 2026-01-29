@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   title: "howth",
-  description: "Fast TypeScript builds, bundling, and dev server",
+  description: "Fast JavaScript & TypeScript builds, bundling, and dev server",
 
   head: [["link", { rel: "icon", href: "/earwig.png" }]],
 

@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: howth
-  text: Fast TypeScript builds
+  text: Fast JavaScript & TypeScript builds
   tagline: A commodius vicus of recirculation for your JavaScript.
   image:
     src: /earwig.png

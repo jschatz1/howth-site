@@ -1,6 +1,6 @@
 # Getting Started
 
-howth is a fast TypeScript build tool, bundler, and dev server written in Rust.
+howth is a fast JavaScript & TypeScript build tool, bundler, and dev server written in Rust.
 
 ## Installation
 
