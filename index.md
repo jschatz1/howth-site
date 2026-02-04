@@ -32,6 +32,8 @@ features:
     details: SWC-powered TypeScript transpilation. 1.2ms cold, 0.1ms warm. 780x faster than tsc. Content-addressed caching with parallel file hashing.
   - title: Bundler + Dev Server
     details: Tree shaking, code splitting, CSS bundling, minification, and a Rollup-compatible plugin system. Built-in dev server with HMR.
+  - title: 172K HTTP RPS
+    details: "Built-in HTTP server reaches 82% of Bun's throughput (172K vs 211K RPS) and 1.5x faster than Node.js. Powered by hyper with batched request handling."
 ---
 
 ## Benchmarks
@@ -54,6 +56,16 @@ howth is **29x faster** than node and **2.7x faster** than bun.
 |---|---|---|---|
 | **howth** | **1.2ms** | **0.1ms** | **8.2MB** |
 | tsc --noEmit | 975ms | - | 143MB |
+
+### HTTP Server (50 connections, 5 seconds)
+
+| Tool | RPS | Latency | Relative |
+|---|---|---|---|
+| **Bun** | 211K | 236µs | 100% |
+| **howth** | 172K | 289µs | 82% |
+| Node.js | 111K | 450µs | 53% |
+
+howth is **1.5x faster** than Node.js and reaches **82% of Bun's throughput**.
 
 ## Why it's fast
 
