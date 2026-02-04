@@ -51,6 +51,33 @@ Available targets:
 
 Each archive contains both `howth` and `fastnode` binaries.
 
+## Docker
+
+Pull and run the official Docker image:
+
+```sh
+docker pull ghcr.io/jschatz1/howth:latest
+```
+
+Run a script:
+
+```sh
+docker run -v $(pwd):/app ghcr.io/jschatz1/howth run script.js
+```
+
+Use as a base image:
+
+```dockerfile
+FROM ghcr.io/jschatz1/howth:latest
+WORKDIR /app
+COPY . .
+CMD ["howth", "run", "index.js"]
+```
+
+Available tags:
+- `latest` - Most recent release
+- `0.1.1` - Specific version
+
 ## Build from Source
 
 Requires [Rust](https://rustup.rs/) 1.75 or later:
