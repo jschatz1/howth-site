@@ -26,6 +26,7 @@ export default defineConfig({
           { text: "Architecture", link: "/guide/architecture" },
           { text: "Installation", link: "/guide/installation" },
           { text: "CLI Reference", link: "/guide/cli-reference" },
+          { text: "Framework Compatibility", link: "/guide/framework-compatibility" },
         ],
       },
       {
