@@ -10,11 +10,11 @@ hero:
     alt: howth mascot
   actions:
     - theme: brand
+      text: Try in Browser
+      link: https://run.howth.run
+    - theme: alt
       text: Get Started
       link: /guide/getting-started
-    - theme: alt
-      text: How It Works
-      link: /guide/architecture
     - theme: alt
       text: GitHub
       link: https://github.com/jschatz1/howth
