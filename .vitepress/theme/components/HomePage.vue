@@ -39,14 +39,14 @@ function copyInstallCommand() {
           </div>
 
           <h1 class="hero-title">
-            The <span class="highlight">fastest</span> JavaScript<br/>
-            test runner
+            The <span class="highlight">fastest</span> all-in-one<br/>
+            JavaScript toolkit
           </h1>
 
           <p class="hero-description">
-            howth runs tests <strong>2.6x faster than Bun</strong> and <strong>29x faster than Node</strong>.
-            A persistent daemon keeps V8 and compilers warm in memory, eliminating startup cost entirely.
-            Drop <code>howth test</code> into any Node.js project today.
+            Runtime, bundler, test runner, package manager, and dev server in one binary.
+            A persistent daemon keeps everything warm in memory.
+            Tests run <strong>2.6x faster than Bun</strong>. Drop into any Node.js project today.
           </p>
 
           <div class="install-section">
