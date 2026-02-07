@@ -887,6 +887,42 @@
   }
 }
 
+/* Daemon comparison */
+.daemon-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.daemon-card {
+  background: var(--howth-bg-dark);
+  border: 1px solid var(--howth-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.daemon-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.daemon-step {
+  background: var(--howth-bg-elevated);
+  border: 1px solid var(--howth-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--howth-text-muted);
+}
+
+.daemon-arrow {
+  color: var(--howth-text-dim);
+  font-size: 0.875rem;
+}
+
 /* Sticky nav override */
 .VPNav {
   background: var(--howth-bg-dark) !important;

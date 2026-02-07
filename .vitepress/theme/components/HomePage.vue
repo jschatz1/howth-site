@@ -4,9 +4,6 @@ import { ref } from 'vue'
 // Install tab state
 const installTab = ref<'unix' | 'windows'>('unix')
 
-// Benchmark tab state
-const benchmarkTab = ref<'bundler' | 'tests' | 'http'>('bundler')
-
 // API chip state
 const activeApi = ref('http-server')
 
@@ -42,14 +39,14 @@ function copyInstallCommand() {
           </div>
 
           <h1 class="hero-title">
-            howth is a <span class="highlight">fast</span> JavaScript<br/>
-            runtime & toolkit
+            The <span class="highlight">fastest</span> JavaScript<br/>
+            test runner
           </h1>
 
           <p class="hero-description">
-            howth is a fast, <strong>incrementally adoptable</strong> all-in-one JavaScript, TypeScript & JSX toolkit.
-            Use individual tools like <code>howth test</code> or <code>howth install</code> in Node.js projects,
-            or adopt the complete stack with a fast JavaScript runtime, bundler, test runner, and package manager built in.
+            howth runs tests <strong>2.6x faster than Bun</strong> and <strong>29x faster than Node</strong>.
+            A persistent daemon keeps V8 and compilers warm in memory, eliminating startup cost entirely.
+            Drop <code>howth test</code> into any Node.js project today.
           </p>
 
           <div class="install-section">
@@ -99,65 +96,7 @@ function copyInstallCommand() {
         </div>
 
         <div class="hero-right">
-          <div class="benchmark-tabs">
-            <button
-              class="benchmark-tab"
-              :class="{ active: benchmarkTab === 'bundler' }"
-              @click="benchmarkTab = 'bundler'"
-            >
-              Bundler
-            </button>
-            <button
-              class="benchmark-tab"
-              :class="{ active: benchmarkTab === 'tests' }"
-              @click="benchmarkTab = 'tests'"
-            >
-              Tests
-            </button>
-            <button
-              class="benchmark-tab"
-              :class="{ active: benchmarkTab === 'http' }"
-              @click="benchmarkTab = 'http'"
-            >
-              HTTP
-            </button>
-          </div>
-
-          <div class="benchmark-chart" v-if="benchmarkTab === 'bundler'">
-            <div class="benchmark-title">Bundling 10,000 React components</div>
-            <div class="benchmark-subtitle">Build time in milliseconds (Apple M3 Pro)</div>
-
-            <div class="benchmark-row">
-              <span class="benchmark-label">Bun</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar howth" style="width: 8%"></div>
-              </div>
-              <span class="benchmark-time">162 ms</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="benchmark-label">howth</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 19%"></div>
-              </div>
-              <span class="benchmark-time">387 ms</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="benchmark-label">esbuild</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 28%"></div>
-              </div>
-              <span class="benchmark-time">571 ms</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="benchmark-label">Rolldown</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 24%"></div>
-              </div>
-              <span class="benchmark-time">495 ms</span>
-            </div>
-          </div>
-
-          <div class="benchmark-chart" v-if="benchmarkTab === 'tests'">
+          <div class="benchmark-chart">
             <div class="benchmark-title">Running 10,000 tests</div>
             <div class="benchmark-subtitle">Test execution time (Apple M3 Pro)</div>
 
@@ -171,118 +110,123 @@ function copyInstallCommand() {
             <div class="benchmark-row">
               <span class="benchmark-label">Bun</span>
               <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 9%"></div>
+                <div class="benchmark-bar other" style="width: 9%; position: relative;">
+                  <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">2.6x slower</span>
+                </div>
               </div>
               <span class="benchmark-time">368 ms</span>
             </div>
             <div class="benchmark-row">
               <span class="benchmark-label">Vitest</span>
               <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 35%"></div>
+                <div class="benchmark-bar other" style="width: 35%; position: relative;">
+                  <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">10x slower</span>
+                </div>
               </div>
               <span class="benchmark-time">1.4s</span>
             </div>
             <div class="benchmark-row">
+              <span class="benchmark-label">Jest+SWC</span>
+              <div class="benchmark-bar-container">
+                <div class="benchmark-bar other" style="width: 75%; position: relative;">
+                  <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">22x slower</span>
+                </div>
+              </div>
+              <span class="benchmark-time">3.07s</span>
+            </div>
+            <div class="benchmark-row">
               <span class="benchmark-label">node --test</span>
               <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 100%"></div>
+                <div class="benchmark-bar other" style="width: 100%; position: relative;">
+                  <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">29x slower</span>
+                </div>
               </div>
               <span class="benchmark-time">4.08s</span>
             </div>
-          </div>
 
-          <div class="benchmark-chart" v-if="benchmarkTab === 'http'">
-            <div class="benchmark-title">HTTP Server Throughput</div>
-            <div class="benchmark-subtitle">Requests per second (50 connections)</div>
-
-            <div class="benchmark-row">
-              <span class="benchmark-label">Bun</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar howth" style="width: 100%"></div>
-              </div>
-              <span class="benchmark-time">211K rps</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="benchmark-label">howth</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 82%"></div>
-              </div>
-              <span class="benchmark-time">172K rps</span>
-            </div>
-            <div class="benchmark-row">
-              <span class="benchmark-label">Node.js</span>
-              <div class="benchmark-bar-container">
-                <div class="benchmark-bar other" style="width: 53%"></div>
-              </div>
-              <span class="benchmark-time">111K rps</span>
-            </div>
+            <p style="text-align: center; color: var(--howth-text-dim); font-size: 0.75rem; margin-top: 1.5rem;">
+              <a href="/guide/getting-started" style="color: var(--howth-primary-light);">View benchmark methodology &rarr;</a>
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: Unified Toolkit Overview -->
-    <section class="homepage-section">
-      <h2 class="section-title">Five tools, one toolkit</h2>
+    <!-- Section 2: The Daemon Architecture (Key Differentiator) -->
+    <section class="homepage-section" style="background: var(--howth-bg-card);">
+      <h2 class="section-title">Zero startup cost. Every time.</h2>
       <p class="section-subtitle">
-        Use them together as an all-in-one toolkit, or adopt them incrementally.
-        <code>howth test</code> works in Node.js projects. <code>howth install</code> can be used as the fastest npm client.
-        Each tool stands on its own.
+        howth's persistent daemon keeps compilers, caches, and a V8 runtime warm in memory.
+        After the first run, every command is instant.
+      </p>
+
+      <div class="daemon-comparison">
+        <div class="daemon-card">
+          <h3 style="color: var(--howth-text-dim); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Traditional runtimes</h3>
+          <div class="daemon-flow">
+            <div class="daemon-step">Start process</div>
+            <div class="daemon-arrow">&rarr;</div>
+            <div class="daemon-step">Load V8/JSC</div>
+            <div class="daemon-arrow">&rarr;</div>
+            <div class="daemon-step">Parse TypeScript</div>
+            <div class="daemon-arrow">&rarr;</div>
+            <div class="daemon-step">Transpile</div>
+            <div class="daemon-arrow">&rarr;</div>
+            <div class="daemon-step">Execute</div>
+          </div>
+          <p style="color: var(--howth-text-dim); font-size: 0.875rem; margin-top: 1rem;">
+            Every command pays full startup cost. Cold start every time.
+          </p>
+        </div>
+
+        <div class="daemon-card" style="border-color: var(--howth-primary); background: rgba(59, 130, 246, 0.05);">
+          <h3 style="color: var(--howth-primary-light); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">howth daemon</h3>
+          <div class="daemon-flow">
+            <div class="daemon-step" style="background: var(--howth-primary); border-color: var(--howth-primary);">IPC message</div>
+            <div class="daemon-arrow">&rarr;</div>
+            <div class="daemon-step" style="background: var(--howth-primary); border-color: var(--howth-primary);">Execute</div>
+          </div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-top: 1rem;">
+            V8 is already running. Compilers are warm. Caches are hot. Just execute.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--howth-primary-light);">0.1ms</div>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Warm transpile time</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--howth-primary-light);">1</div>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Unix socket round-trip per command</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--howth-primary-light);">780x</div>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Faster than tsc</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Unified Toolkit Overview -->
+    <section class="homepage-section">
+      <h2 class="section-title">Start with tests. Adopt the rest incrementally.</h2>
+      <p class="section-subtitle">
+        Drop <code>howth test</code> into any Node.js project today. No migration required.
+        When you're ready, adopt the runtime, bundler, and package manager one at a time.
       </p>
 
       <div class="toolkit-grid">
-        <div class="toolkit-card">
-          <div class="toolkit-card-header">
-            <div>
-              <h3 class="toolkit-card-title">JavaScript Runtime</h3>
-              <span class="toolkit-badge">Starts 3x faster than Node.js</span>
-            </div>
-          </div>
-          <div class="toolkit-command"><span class="prompt">$</span> howth run ./index.ts</div>
-          <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-            A fast JavaScript runtime designed as a drop-in replacement for Node.js.
-          </p>
-          <div class="toolkit-features">
-            <span class="toolkit-feature">Node.js API compatibility</span>
-            <span class="toolkit-feature">TypeScript, JSX & React</span>
-            <span class="toolkit-feature">PostgreSQL, Redis, SQLite</span>
-            <span class="toolkit-feature">Hot & watch mode built-in</span>
-            <span class="toolkit-feature">Environment variables</span>
-            <span class="toolkit-feature">Web standard APIs</span>
-          </div>
-        </div>
-
-        <div class="toolkit-card">
-          <div class="toolkit-card-header">
-            <div>
-              <h3 class="toolkit-card-title">Package Manager</h3>
-              <span class="toolkit-badge">30x faster</span>
-            </div>
-          </div>
-          <div class="toolkit-command"><span class="prompt">$</span> howth install</div>
-          <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-            Install packages up to 30x faster than npm with a global cache and workspaces.
-          </p>
-          <div class="toolkit-features">
-            <span class="toolkit-feature">Simple migration from npm/pnpm/yarn</span>
-            <span class="toolkit-feature">Eliminate phantom dependencies</span>
-            <span class="toolkit-feature">Workspaces, monorepos</span>
-            <span class="toolkit-feature">Lifecycle scripts</span>
-            <span class="toolkit-feature">Dependency auditing</span>
-            <span class="toolkit-feature">Block malicious packages</span>
-          </div>
-        </div>
-
-        <div class="toolkit-card">
+        <div class="toolkit-card" style="border-color: var(--howth-primary); background: rgba(59, 130, 246, 0.03);">
           <div class="toolkit-card-header">
             <div>
               <h3 class="toolkit-card-title">Test Runner</h3>
-              <span class="toolkit-badge replaces">Replaces Jest & Vitest</span>
+              <span class="toolkit-badge" style="background: var(--howth-primary);">2.6x faster than Bun</span>
             </div>
           </div>
           <div class="toolkit-command"><span class="prompt">$</span> howth test</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-            Jest-compatible test runner with built-in code coverage and watch mode.
+            The fastest JavaScript test runner. Jest-compatible API, works in any Node.js project.
           </p>
           <div class="toolkit-features">
             <span class="toolkit-feature">Jest-compatible expect() API</span>
@@ -297,21 +241,63 @@ function copyInstallCommand() {
         <div class="toolkit-card">
           <div class="toolkit-card-header">
             <div>
+              <h3 class="toolkit-card-title">JavaScript Runtime</h3>
+              <span class="toolkit-badge">85% Node.js compatible</span>
+            </div>
+          </div>
+          <div class="toolkit-command"><span class="prompt">$</span> howth run ./index.ts</div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+            Run TypeScript directly. Daemon keeps everything warm for instant execution.
+          </p>
+          <div class="toolkit-features">
+            <span class="toolkit-feature">Node.js API compatibility</span>
+            <span class="toolkit-feature">TypeScript, JSX & React</span>
+            <span class="toolkit-feature">Hot & watch mode built-in</span>
+            <span class="toolkit-feature">Environment variables</span>
+            <span class="toolkit-feature">Web standard APIs</span>
+            <span class="toolkit-feature">172K HTTP req/s</span>
+          </div>
+        </div>
+
+        <div class="toolkit-card">
+          <div class="toolkit-card-header">
+            <div>
+              <h3 class="toolkit-card-title">Package Manager</h3>
+              <span class="toolkit-badge">30x faster than npm</span>
+            </div>
+          </div>
+          <div class="toolkit-command"><span class="prompt">$</span> howth install</div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+            Drop-in npm replacement with global cache and workspaces.
+          </p>
+          <div class="toolkit-features">
+            <span class="toolkit-feature">Works with package.json</span>
+            <span class="toolkit-feature">Eliminate phantom dependencies</span>
+            <span class="toolkit-feature">Workspaces, monorepos</span>
+            <span class="toolkit-feature">Lifecycle scripts</span>
+            <span class="toolkit-feature">Dependency auditing</span>
+            <span class="toolkit-feature">Block malicious packages</span>
+          </div>
+        </div>
+
+        <div class="toolkit-card">
+          <div class="toolkit-card-header">
+            <div>
               <h3 class="toolkit-card-title">Bundler</h3>
-              <span class="toolkit-badge replaces">Replaces Vite and esbuild</span>
+              <span class="toolkit-badge">Tree shaking & splitting</span>
             </div>
           </div>
           <div class="toolkit-command"><span class="prompt">$</span> howth bundle ./app.tsx</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-            Bundle TypeScript, JSX, React & CSS for both browsers and servers.
+            Bundle TypeScript, JSX, React & CSS for browsers and servers.
           </p>
           <div class="toolkit-features">
             <span class="toolkit-feature">TypeScript & JSX built-in</span>
             <span class="toolkit-feature">CSS imports & bundling</span>
             <span class="toolkit-feature">React support out of the box</span>
-            <span class="toolkit-feature">Build for browser, Bun, Node.js</span>
             <span class="toolkit-feature">Tree shaking</span>
             <span class="toolkit-feature">Code splitting</span>
+            <span class="toolkit-feature">Minification</span>
           </div>
         </div>
 
@@ -324,7 +310,7 @@ function copyInstallCommand() {
           </div>
           <div class="toolkit-command"><span class="prompt">$</span> howth dev ./src/main.tsx</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-            High-performance development server with instant hot module replacement.
+            Development server with instant hot module replacement.
           </p>
           <div class="toolkit-features">
             <span class="toolkit-feature">Instant HMR</span>
@@ -338,72 +324,36 @@ function copyInstallCommand() {
       </div>
     </section>
 
-    <!-- Section 3: Performance Proof -->
+    <!-- Section 3: Why the Daemon Matters -->
     <section class="homepage-section" style="background: var(--howth-bg-card);">
-      <div class="terminal" style="max-width: 300px;">
-        <div class="terminal-header">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
+      <h2 class="section-title">Built for iterative development</h2>
+      <p class="section-subtitle">
+        In a typical dev session, you run tests hundreds of times. howth gets faster with each run.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.75rem; padding: 1.5rem;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-text-dim); margin-bottom: 0.75rem;">First run</div>
+          <div style="font-size: 2rem; font-weight: 700; color: var(--howth-text); margin-bottom: 0.5rem;">~200ms</div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem;">Daemon starts, V8 initializes, compilers warm up. Still fast.</p>
         </div>
-        <div class="terminal-content">
-          <span class="prompt">$</span> howth test
+        <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid var(--howth-primary); border-radius: 0.75rem; padding: 1.5rem;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-primary-light); margin-bottom: 0.75rem;">Every run after</div>
+          <div style="font-size: 2rem; font-weight: 700; color: var(--howth-primary-light); margin-bottom: 0.5rem;">~139ms</div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem;">V8 is already running. Caches are hot. Just execute your code.</p>
+        </div>
+        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.75rem; padding: 1.5rem;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-text-dim); margin-bottom: 0.75rem;">Changed file only</div>
+          <div style="font-size: 2rem; font-weight: 700; color: var(--howth-accent); margin-bottom: 0.5rem;">~50ms</div>
+          <p style="color: var(--howth-text-muted); font-size: 0.875rem;">Only re-transpile what changed. Unchanged modules stay cached.</p>
         </div>
       </div>
 
-      <h2 class="section-title">howth is a test runner that makes<br/>the rest look like test walkers.</h2>
-
-      <div style="max-width: 700px; margin: 3rem auto;">
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">howth</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar howth" style="width: 3%"></div>
-          </div>
-          <span class="benchmark-time">00.14s</span>
-        </div>
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">Bun</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 9%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">2.6x slower</span>
-            </div>
-          </div>
-          <span class="benchmark-time">00.37s</span>
-        </div>
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">Vitest</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 35%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">10x slower</span>
-            </div>
-          </div>
-          <span class="benchmark-time">01.40s</span>
-        </div>
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">Jest+SWC</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 75%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">22x slower</span>
-            </div>
-          </div>
-          <span class="benchmark-time">03.07s</span>
-        </div>
-        <div class="benchmark-row">
-          <span class="benchmark-label" style="width: 100px;">node --test</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 100%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">29x slower</span>
-            </div>
-          </div>
-          <span class="benchmark-time">04.08s</span>
-        </div>
-      </div>
-
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <span>Replace <code style="background: var(--howth-bg-elevated); padding: 0.25rem 0.5rem; border-radius: 4px;">jest</code> with <code style="background: var(--howth-bg-elevated); padding: 0.25rem 0.5rem; border-radius: 4px;">howth test</code> to run your tests 10-30x faster.</span>
-        <a href="/guide/getting-started" class="learn-card" style="display: inline-flex; padding: 0.75rem 1.5rem; background: transparent; border: 1px solid var(--howth-border);">
-          Try it &rarr;
-        </a>
+      <div style="text-align: center; margin-top: 3rem;">
+        <p style="color: var(--howth-text-muted); max-width: 600px; margin: 0 auto;">
+          Over a day of development with 500 test runs, howth saves you <strong style="color: var(--howth-primary-light);">~2 minutes</strong> of waiting
+          compared to Bun and <strong style="color: var(--howth-primary-light);">~30 minutes</strong> compared to Jest.
+        </p>
       </div>
     </section>
 
@@ -672,224 +622,172 @@ app.<span class="function">listen</span>(<span class="number">3000</span>);</cod
       </div>
     </section>
 
-    <!-- Section 7: Package Manager -->
+    <!-- Section 7: Easy Migration -->
     <section class="homepage-section" style="background: var(--howth-bg-card);">
-      <div class="terminal" style="max-width: 350px;">
-        <div class="terminal-header">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
+      <h2 class="section-title">Try it in 30 seconds</h2>
+      <p class="section-subtitle">
+        No migration needed. Just run one command in your existing project.
+      </p>
+
+      <div class="code-block" style="max-width: 600px; margin: 0 auto;">
+        <div class="code-block-header">
+          <span class="code-block-filename">Your existing Node.js project</span>
         </div>
-        <div class="terminal-content">
-          <span class="prompt">$</span> howth install
-        </div>
+        <pre><code><span class="comment"># Install howth</span>
+curl -fsSL https://howth.run/install | sh
+
+<span class="comment"># Run your tests with howth (works with Jest syntax)</span>
+howth test
+
+<span class="comment"># That's it. No config changes needed.</span>
+<span class="comment"># Your existing test files just work.</span></code></pre>
       </div>
 
-      <h2 class="section-title" style="margin-top: 2rem;">howth is an npm-compatible package manager.</h2>
-
-      <div style="max-width: 700px; margin: 3rem auto;">
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">howth</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar howth" style="width: 3%"></div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">
+            <span class="check">Yes</span>
           </div>
-          <span class="benchmark-time">00.36s</span>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Works with package.json</div>
         </div>
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">pnpm</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 53%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">17x slower</span>
-            </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">
+            <span class="check">Yes</span>
           </div>
-          <span class="benchmark-time">06.44s</span>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Works with node_modules</div>
         </div>
-        <div class="benchmark-row" style="margin-bottom: 1.5rem;">
-          <span class="benchmark-label" style="width: 100px;">npm</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 88%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">29x slower</span>
-            </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">
+            <span class="check">Yes</span>
           </div>
-          <span class="benchmark-time">10.58s</span>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Works with Jest tests</div>
         </div>
-        <div class="benchmark-row">
-          <span class="benchmark-label" style="width: 100px;">Yarn</span>
-          <div class="benchmark-bar-container">
-            <div class="benchmark-bar other" style="width: 100%; position: relative;">
-              <span style="position: absolute; left: 100%; padding-left: 8px; color: var(--howth-text-dim); font-size: 0.75rem; white-space: nowrap;">33x slower</span>
-            </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">
+            <span class="check">Yes</span>
           </div>
-          <span class="benchmark-time">12.08s</span>
+          <div style="color: var(--howth-text-muted); font-size: 0.875rem;">Works with TypeScript</div>
         </div>
-        <p style="text-align: center; color: var(--howth-text-dim); font-size: 0.875rem; margin-top: 1.5rem;">
-          Installing dependencies from cache for a React app.
-        </p>
-      </div>
-
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <span>Replace <code style="background: var(--howth-bg-elevated); padding: 0.25rem 0.5rem; border-radius: 4px;">npm</code> with <code style="background: var(--howth-bg-elevated); padding: 0.25rem 0.5rem; border-radius: 4px;">howth install</code> to get 30x faster package installs.</span>
-        <a href="/guide/getting-started" class="learn-card" style="display: inline-flex; padding: 0.75rem 1.5rem; background: transparent; border: 1px solid var(--howth-border);">
-          Try it &rarr;
-        </a>
       </div>
     </section>
 
     <!-- Section 8: Competitive Differentiation Matrix -->
     <section class="homepage-section">
       <h2 class="section-title">What's different about howth?</h2>
-      <p class="section-subtitle">howth provides extensive builtin APIs and tooling</p>
+      <p class="section-subtitle">A unique architecture that no other runtime has</p>
 
       <div style="overflow-x: auto;">
         <table class="comparison-table">
           <thead>
             <tr>
-              <th style="min-width: 300px;">Builtin Core Features</th>
+              <th style="min-width: 300px;">Architecture</th>
               <th style="text-align: center; width: 80px;">howth</th>
               <th style="text-align: center; width: 80px;">Node</th>
               <th style="text-align: center; width: 80px;">Bun</th>
             </tr>
           </thead>
           <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.05);">
+              <td>
+                <div class="feature-name">Persistent daemon</div>
+                <div class="feature-desc">Background process keeps runtime warm - zero startup cost</div>
+              </td>
+              <td style="text-align: center;"><span class="check" style="font-weight: 600;">Yes</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+            </tr>
+            <tr style="background: rgba(59, 130, 246, 0.05);">
+              <td>
+                <div class="feature-name">In-memory module cache</div>
+                <div class="feature-desc">Transpiled modules stay in memory across runs</div>
+              </td>
+              <td style="text-align: center;"><span class="check" style="font-weight: 600;">Yes</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+            </tr>
+            <tr style="background: rgba(59, 130, 246, 0.05);">
+              <td>
+                <div class="feature-name">IPC-based execution</div>
+                <div class="feature-desc">Commands execute via Unix socket, no process spawn</div>
+              </td>
+              <td style="text-align: center;"><span class="check" style="font-weight: 600;">Yes</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+              <td style="text-align: center;"><span class="cross">No</span></td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th>Performance</th>
+              <th style="text-align: center;">howth</th>
+              <th style="text-align: center;">Node</th>
+              <th style="text-align: center;">Bun</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>
-                <div class="feature-name">Node.js compatibility</div>
-                <div class="feature-desc">Aiming to be a drop-in replacement for Node.js apps</div>
+                <div class="feature-name">Test runner (10K tests)</div>
+                <div class="feature-desc">Jest-compatible test execution</div>
+              </td>
+              <td style="text-align: center;"><span class="check" style="font-weight: 600;">139ms</span></td>
+              <td style="text-align: center;"><span class="partial">4.08s</span></td>
+              <td style="text-align: center;"><span class="partial">368ms</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="feature-name">Warm transpile</div>
+                <div class="feature-desc">TypeScript to JavaScript after daemon warm</div>
+              </td>
+              <td style="text-align: center;"><span class="check" style="font-weight: 600;">0.1ms</span></td>
+              <td style="text-align: center;"><span class="partial">N/A</span></td>
+              <td style="text-align: center;"><span class="partial">~5ms</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="feature-name">HTTP throughput</div>
+                <div class="feature-desc">Requests per second (50 connections)</div>
+              </td>
+              <td style="text-align: center;"><span class="partial">172K</span></td>
+              <td style="text-align: center;"><span class="partial">111K</span></td>
+              <td style="text-align: center;"><span class="check">211K</span></td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th>Compatibility</th>
+              <th style="text-align: center;">howth</th>
+              <th style="text-align: center;">Node</th>
+              <th style="text-align: center;">Bun</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="feature-name">Node.js API coverage</div>
+                <div class="feature-desc">Percentage of Node.js APIs implemented</div>
               </td>
               <td style="text-align: center;"><span class="partial">~85%</span></td>
               <td style="text-align: center;"><span class="check">100%</span></td>
-              <td style="text-align: center;"><span class="partial">~95%</span></td>
+              <td style="text-align: center;"><span class="check">~95%</span></td>
             </tr>
             <tr>
               <td>
-                <div class="feature-name">Web Standard APIs</div>
-                <div class="feature-desc">Support for fetch, URL, EventTarget, Headers, etc.</div>
+                <div class="feature-name">Works in existing Node.js projects</div>
+                <div class="feature-desc">Drop-in usage without migration</div>
               </td>
               <td style="text-align: center;"><span class="check">Yes</span></td>
               <td style="text-align: center;"><span class="check">Yes</span></td>
               <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">TypeScript</div>
-                <div class="feature-desc">First-class support, including paths and namespace</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="partial">Exp.</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">JSX</div>
-                <div class="feature-desc">First-class support without configuration</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-          </tbody>
-          <thead>
-            <tr>
-              <th>Builtin APIs</th>
-              <th style="text-align: center;">howth</th>
-              <th style="text-align: center;">Node</th>
-              <th style="text-align: center;">Bun</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="feature-name">HTTP server</div>
-                <div class="feature-desc">Lightning-fast HTTP server built-in</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">WebSocket server</div>
-                <div class="feature-desc">WebSocket server with pub/sub support</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Cookies API</div>
-                <div class="feature-desc">Parse and set cookies with zero overhead</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Markdown parser</div>
-                <div class="feature-desc">Built-in CommonMark/GFM Markdown parsing</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-          </tbody>
-          <thead>
-            <tr>
-              <th>Builtin Tooling</th>
-              <th style="text-align: center;">howth</th>
-              <th style="text-align: center;">Node</th>
-              <th style="text-align: center;">Bun</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="feature-name">npm package management</div>
-                <div class="feature-desc">Install, manage, and publish npm-compatible dependencies</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Bundler</div>
-                <div class="feature-desc">Build production-ready code for frontend & backend</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Jest-compatible test runner</div>
-                <div class="feature-desc">Testing library compatible with Jest</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Frontend Development Server</div>
-                <div class="feature-desc">Run modern frontend apps with HMR</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="feature-name">Persistent daemon</div>
-                <div class="feature-desc">Background process for instant warm starts</div>
-              </td>
-              <td style="text-align: center;"><span class="check">Yes</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
-              <td style="text-align: center;"><span class="cross">No</span></td>
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <p style="color: var(--howth-text-muted); font-size: 0.9375rem;">
+          howth's daemon architecture means the more you use it, the faster it gets.
+          Other runtimes pay startup cost every single time.
+        </p>
       </div>
     </section>
 
