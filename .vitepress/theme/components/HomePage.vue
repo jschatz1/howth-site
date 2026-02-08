@@ -179,7 +179,7 @@ function copyInstallCommand() {
           </p>
         </div>
 
-        <div class="daemon-card" style="border-color: var(--howth-primary); background: rgba(59, 130, 246, 0.05);">
+        <div class="daemon-card" style="border-color: var(--howth-primary); background: rgba(13, 148, 136, 0.05);">
           <h3 style="color: var(--howth-primary-light); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">howth daemon</h3>
           <div class="daemon-flow">
             <div class="daemon-step" style="background: var(--howth-primary); border-color: var(--howth-primary);">IPC message</div>
@@ -217,7 +217,7 @@ function copyInstallCommand() {
       </p>
 
       <div class="toolkit-grid">
-        <div class="toolkit-card" style="border-color: var(--howth-primary); background: rgba(59, 130, 246, 0.03);">
+        <div class="toolkit-card" style="border-color: var(--howth-primary); background: rgba(13, 148, 136, 0.03);">
           <div class="toolkit-card-header">
             <div>
               <h3 class="toolkit-card-title">Test Runner</h3>
@@ -332,17 +332,17 @@ function copyInstallCommand() {
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
-        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.75rem; padding: 1.5rem;">
+        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.25rem; padding: 1.5rem;">
           <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-text-dim); margin-bottom: 0.75rem;">First run</div>
           <div style="font-size: 2rem; font-weight: 700; color: var(--howth-text); margin-bottom: 0.5rem;">~200ms</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem;">Daemon starts, V8 initializes, compilers warm up. Still fast.</p>
         </div>
-        <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid var(--howth-primary); border-radius: 0.75rem; padding: 1.5rem;">
+        <div style="background: rgba(13, 148, 136, 0.05); border: 1px solid var(--howth-primary); border-radius: 0.25rem; padding: 1.5rem;">
           <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-primary-light); margin-bottom: 0.75rem;">Every run after</div>
           <div style="font-size: 2rem; font-weight: 700; color: var(--howth-primary-light); margin-bottom: 0.5rem;">~139ms</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem;">V8 is already running. Caches are hot. Just execute your code.</p>
         </div>
-        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.75rem; padding: 1.5rem;">
+        <div style="background: var(--howth-bg-dark); border: 1px solid var(--howth-border); border-radius: 0.25rem; padding: 1.5rem;">
           <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--howth-text-dim); margin-bottom: 0.75rem;">Changed file only</div>
           <div style="font-size: 2rem; font-weight: 700; color: var(--howth-accent); margin-bottom: 0.5rem;">~50ms</div>
           <p style="color: var(--howth-text-muted); font-size: 0.875rem;">Only re-transpile what changed. Unchanged modules stay cached.</p>
@@ -687,7 +687,7 @@ howth test
             </tr>
           </thead>
           <tbody>
-            <tr style="background: rgba(59, 130, 246, 0.05);">
+            <tr style="background: rgba(13, 148, 136, 0.05);">
               <td>
                 <div class="feature-name">Persistent daemon</div>
                 <div class="feature-desc">Background process keeps runtime warm - zero startup cost</div>
@@ -696,7 +696,7 @@ howth test
               <td style="text-align: center;"><span class="cross">No</span></td>
               <td style="text-align: center;"><span class="cross">No</span></td>
             </tr>
-            <tr style="background: rgba(59, 130, 246, 0.05);">
+            <tr style="background: rgba(13, 148, 136, 0.05);">
               <td>
                 <div class="feature-name">In-memory module cache</div>
                 <div class="feature-desc">Transpiled modules stay in memory across runs</div>
@@ -705,7 +705,7 @@ howth test
               <td style="text-align: center;"><span class="cross">No</span></td>
               <td style="text-align: center;"><span class="cross">No</span></td>
             </tr>
-            <tr style="background: rgba(59, 130, 246, 0.05);">
+            <tr style="background: rgba(13, 148, 136, 0.05);">
               <td>
                 <div class="feature-name">IPC-based execution</div>
                 <div class="feature-desc">Commands execute via Unix socket, no process spawn</div>

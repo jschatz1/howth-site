@@ -1,24 +1,24 @@
-/* Howth Custom Theme - Distinct color palette */
+/* Howth Custom Theme - Irish coastal inspired, distinct from Bun */
 :root {
-  /* Primary brand colors - ocean/coastal inspired (Howth is an Irish coastal town) */
-  --howth-primary: #3b82f6;
-  --howth-primary-light: #60a5fa;
-  --howth-primary-dark: #2563eb;
+  /* Primary brand colors - deeper teal/emerald (Irish sea meets cliffs) */
+  --howth-primary: #0d9488;
+  --howth-primary-light: #14b8a6;
+  --howth-primary-dark: #0f766e;
 
-  /* Accent colors */
-  --howth-accent: #10b981;
-  --howth-accent-light: #34d399;
+  /* Accent colors - warm gold (Dublin sunset over Howth) */
+  --howth-accent: #f59e0b;
+  --howth-accent-light: #fbbf24;
   --howth-warning: #f59e0b;
-  --howth-error: #ef4444;
+  --howth-error: #dc2626;
 
-  /* Neutral palette */
-  --howth-bg-dark: #0a0a0f;
-  --howth-bg-card: #111118;
-  --howth-bg-elevated: #1a1a24;
-  --howth-border: #2a2a3a;
-  --howth-text: #e5e5e5;
-  --howth-text-muted: #9ca3af;
-  --howth-text-dim: #6b7280;
+  /* Neutral palette - warmer grays */
+  --howth-bg-dark: #0c0c0c;
+  --howth-bg-card: #141414;
+  --howth-bg-elevated: #1c1c1c;
+  --howth-border: #2e2e2e;
+  --howth-text: #fafafa;
+  --howth-text-muted: #a3a3a3;
+  --howth-text-dim: #737373;
 
   /* VitePress overrides */
   --vp-c-brand-1: var(--howth-primary);
@@ -43,17 +43,15 @@
   background: var(--howth-bg-card);
 }
 
-/* Section headers */
+/* Section headers - clean, no gradient text */
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.25rem;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 1rem;
   line-height: 1.3;
-  background: linear-gradient(135deg, var(--howth-primary-light), var(--howth-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--howth-text);
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
@@ -75,13 +73,22 @@
 .hero-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 1000px;
-  height: 500px;
-  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  top: -100px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -92,7 +99,7 @@
   padding: 0.5rem 1rem;
   background: var(--howth-bg-elevated);
   border: 1px solid var(--howth-border);
-  border-radius: 9999px;
+  border-radius: 0.25rem;
   font-size: 0.875rem;
   color: var(--howth-text-muted);
   margin-bottom: 2rem;
@@ -111,11 +118,11 @@
 }
 
 .hero-title .highlight {
-  background: linear-gradient(135deg, var(--howth-primary-light), var(--howth-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-style: italic;
+  color: var(--howth-primary-light);
+  font-style: normal;
+  text-decoration: underline;
+  text-decoration-color: var(--howth-accent);
+  text-underline-offset: 4px;
 }
 
 .hero-description {
@@ -144,11 +151,11 @@
 }
 
 .install-tab:first-child {
-  border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 0.25rem 0 0 0.25rem;
 }
 
 .install-tab:last-child {
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .install-tab.active {
@@ -164,7 +171,7 @@
   gap: 1rem;
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 1rem 1.5rem;
   max-width: 600px;
   margin: 0 auto 3rem;
@@ -223,7 +230,7 @@
 .benchmark-chart {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 2rem;
   max-width: 500px;
 }
@@ -273,7 +280,7 @@
 }
 
 .benchmark-bar.howth {
-  background: linear-gradient(90deg, var(--howth-primary), var(--howth-accent));
+  background: var(--howth-primary);
 }
 
 .benchmark-bar.other {
@@ -299,15 +306,15 @@
 .toolkit-card {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 1.5rem;
   position: relative;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .toolkit-card:hover {
   border-color: var(--howth-primary);
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px var(--howth-primary);
 }
 
 .toolkit-card-header {
@@ -337,7 +344,7 @@
 
 .toolkit-command {
   background: var(--howth-bg-dark);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 0.75rem 1rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.875rem;
@@ -378,7 +385,7 @@
 .capability-category {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 1.5rem;
 }
 
@@ -421,7 +428,7 @@
   width: 100%;
   border-collapse: collapse;
   background: var(--howth-bg-card);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   overflow: hidden;
   margin-top: 3rem;
 }
@@ -471,33 +478,40 @@
   justify-content: center;
   gap: 0.75rem;
   margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .api-chip {
   padding: 0.5rem 1rem;
-  background: var(--howth-bg-elevated);
+  background: transparent;
   border: 1px solid var(--howth-border);
-  border-radius: 9999px;
+  border-radius: 0.25rem;
   font-size: 0.875rem;
   color: var(--howth-text-muted);
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.api-chip:hover,
+.api-chip:hover {
+  border-color: var(--howth-text-muted);
+  color: var(--howth-text);
+}
+
 .api-chip.active {
-  background: var(--howth-primary);
+  background: transparent;
   border-color: var(--howth-primary);
-  color: white;
+  color: var(--howth-primary-light);
 }
 
 /* Code block */
 .code-block {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   overflow: hidden;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -596,16 +610,15 @@
 .learn-card {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 2rem;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s;
+  transition: border-color 0.2s;
 }
 
 .learn-card:hover {
   border-color: var(--howth-primary);
-  transform: translateY(-2px);
 }
 
 .learn-card-title {
@@ -674,7 +687,7 @@
 .terminal {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   overflow: hidden;
   max-width: 400px;
   margin: 0 auto 2rem;
@@ -852,10 +865,7 @@
   font-size: 2rem;
   line-height: 1.3;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--howth-primary-light), var(--howth-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--howth-text);
 }
 
 .philosophy-points {
@@ -877,7 +887,7 @@
 .philosophy-code {
   background: var(--howth-bg-card);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 1.5rem;
 }
 
@@ -898,7 +908,7 @@
 .daemon-card {
   background: var(--howth-bg-dark);
   border: 1px solid var(--howth-border);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   padding: 1.5rem;
 }
 
@@ -912,7 +922,7 @@
 .daemon-step {
   background: var(--howth-bg-elevated);
   border: 1px solid var(--howth-border);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   font-size: 0.8125rem;
   color: var(--howth-text-muted);
