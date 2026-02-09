@@ -1093,7 +1093,7 @@
   margin-bottom: 2rem;
 }
 
-/* Homepage: hide sidebar, footer, outline and go full width */
+/* Homepage: hide sidebar, footer, outline and go full width edge-to-edge */
 .has-homepage .VPSidebar,
 .has-homepage .VPDocFooter,
 .has-homepage .VPDocOutlineDropdown,
@@ -1101,17 +1101,35 @@
   display: none !important;
 }
 
+.has-homepage .VPDoc {
+  padding: 0 !important;
+}
+
 .has-homepage .VPDoc .container {
   max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .has-homepage .VPDoc .content {
   max-width: 100% !important;
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 .has-homepage .VPDoc .content-container {
   max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.has-homepage .VPContent {
+  padding: 0 !important;
+}
+
+.has-homepage .vp-doc {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .VPNav {
