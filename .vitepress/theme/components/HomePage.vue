@@ -193,7 +193,7 @@ function copyInstallCommand() {
         </div>
       </div>
 
-      <a href="/benchmarks" class="benchmark-link">View methodology →</a>
+      <a href="https://github.com/jschatz1/benchmarks" class="benchmark-link">View methodology →</a>
     </section>
 
     <!-- The Daemon: Before/After comparison -->
