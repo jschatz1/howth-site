@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const posts = [
   {
-    title: 'The Fastest JavaScript Bundler',
+    title: 'A Fast Bundler',
     date: '2026-02-09',
-    description: 'How we made howth faster than bun, esbuild, rolldown, vite, rspack, and rsbuild on the rolldown/benchmarks suite.',
-    link: '/blog/fastest-bundler',
+    description: 'howth came out on top in the rolldown/benchmarks suite against bun, esbuild, rolldown, vite, rspack, and rsbuild.',
+    link: '/blog/a-fast-bundler',
   },
 ]
 </script>

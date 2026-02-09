@@ -57,7 +57,7 @@ export default defineConfig({
         {
           text: "Blog",
           items: [
-            { text: "The Fastest JavaScript Bundler", link: "/blog/fastest-bundler" },
+            { text: "A Fast Bundler", link: "/blog/a-fast-bundler" },
           ],
         },
       ],

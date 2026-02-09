@@ -1,13 +1,13 @@
 ---
-title: The Fastest JavaScript Bundler
+title: A Fast Bundler
 date: 2026-02-09
 ---
 
-# The Fastest JavaScript Bundler
+# A Fast Bundler
 
 <p class="blog-meta">February 9, 2026</p>
 
-howth is now the fastest JavaScript bundler. On the [rolldown/benchmarks](https://github.com/jschatz1/benchmarks) suite (10,000 React JSX components), howth bundles in **275ms** — faster than bun, esbuild, rolldown, vite, rspack, and rsbuild.
+We ran the [rolldown/benchmarks](https://github.com/jschatz1/benchmarks) suite (10,000 React JSX components) against 7 bundlers. howth came out on top at **275ms** — ahead of bun, esbuild, rolldown, vite, rspack, and rsbuild.
 
 ## Results
 
