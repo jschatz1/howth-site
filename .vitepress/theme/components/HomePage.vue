@@ -141,6 +141,8 @@ function copyInstallCommand() {
           <span class="bar-value">2,176ms</span>
         </div>
       </div>
+
+      <a href="https://github.com/jschatz1/benchmarks" class="benchmark-link">Fork of rolldown/benchmarks &mdash; View source &amp; methodology →</a>
     </section>
 
     <!-- Test Runner Benchmark: Stacked cards -->
