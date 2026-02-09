@@ -1093,13 +1093,14 @@
   margin-bottom: 2rem;
 }
 
-/* Homepage: remove VitePress page chrome, let HomePage fill the viewport */
-.homepage ~ .VPDocFooter,
-.homepage ~ .VPDocOutlineDropdown {
+/* Homepage: hide sidebar, footer, outline and go full width */
+.has-homepage .VPSidebar,
+.has-homepage .VPDocFooter,
+.has-homepage .VPDocOutlineDropdown,
+.has-homepage .VPDocAside {
   display: none !important;
 }
 
-/* Let homepage content go full width */
 .has-homepage .VPDoc .container {
   max-width: 100% !important;
 }
