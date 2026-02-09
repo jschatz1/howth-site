@@ -19,7 +19,7 @@ export PATH="$HOME/.howth/bin:$PATH"
 Set a specific version:
 
 ```sh
-HOWTH_VERSION=v0.1.0 curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+HOWTH_VERSION=v0.2.0 curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
 ```
 
 Custom install directory:
@@ -76,7 +76,7 @@ CMD ["howth", "run", "index.js"]
 
 Available tags:
 - `latest` - Most recent release
-- `0.1.1` - Specific version
+- `0.2.0` - Specific version
 
 ## Build from Source
 
