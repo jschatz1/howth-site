@@ -1132,6 +1132,17 @@
   margin: 0 !important;
 }
 
+.has-homepage .VPDoc:not(.has-aside) .content-container,
+.has-homepage .VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+}
+
+.has-homepage .VPDoc:not(.has-aside) .container,
+.has-homepage .VPDoc.has-aside .container {
+  max-width: 100% !important;
+  display: block !important;
+}
+
 .VPNav {
   background: var(--bg) !important;
 }
