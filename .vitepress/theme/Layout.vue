@@ -9,13 +9,15 @@ const { frontmatter } = useData()
 </script>
 
 <template>
-  <HomePage v-if="frontmatter.homepage" />
-  <Layout v-else>
-    <template #doc-before>
-      <BlogIndex v-if="frontmatter.blog" />
-    </template>
-    <template #nav-bar-content-after>
-      <slot name="nav-bar-content-after" />
-    </template>
-  </Layout>
+  <div :class="{ 'has-homepage': frontmatter.homepage }">
+    <Layout>
+      <template #doc-before>
+        <HomePage v-if="frontmatter.homepage" />
+        <BlogIndex v-if="frontmatter.blog" />
+      </template>
+      <template #nav-bar-content-after>
+        <slot name="nav-bar-content-after" />
+      </template>
+    </Layout>
+  </div>
 </template>
