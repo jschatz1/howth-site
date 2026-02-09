@@ -242,6 +242,69 @@
   border: 1px solid var(--border);
 }
 
+/* Bar Graph Section */
+.graph-section {
+  padding: 4rem 2rem;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.bar-graph {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 72px 1fr 72px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bar-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.bar-row.winner .bar-label {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+.bar-track {
+  height: 36px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--border-light);
+  transition: width 0.6s ease;
+}
+
+.bar-fill.howth-bar {
+  background: var(--accent);
+}
+
+.bar-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+}
+
+.bar-row.winner .bar-value {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
 /* Benchmarks Section - Stacked Cards */
 .benchmarks-section {
   padding: 4rem 2rem;

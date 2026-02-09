@@ -85,7 +85,30 @@ function copyInstallCommand() {
       </div>
     </section>
 
-    <!-- Benchmarks: Stacked cards, not bars -->
+    <!-- Bundler Benchmark: Horizontal bar graph -->
+    <section class="graph-section">
+      <h2>Bundler</h2>
+      <p class="section-desc">10,000 React components &mdash; Linux x64 (c3-highcpu-8)</p>
+
+      <div class="bar-graph">
+        <div class="bar-row winner">
+          <span class="bar-label">howth</span>
+          <div class="bar-track">
+            <div class="bar-fill howth-bar" style="width: 84.7%"></div>
+          </div>
+          <span class="bar-value">249ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Bun</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 100%"></div>
+          </div>
+          <span class="bar-value">294ms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Test Runner Benchmark: Stacked cards -->
     <section class="benchmarks-section">
       <h2>Running 10,000 tests</h2>
       <p class="section-desc">Apple M3 Pro, 500 test files</p>
@@ -259,7 +282,7 @@ function copyInstallCommand() {
           <div class="toolkit-content">
             <div class="toolkit-header">
               <h3>Bundler</h3>
-              <span class="toolkit-badge">Tree shaking</span>
+              <span class="toolkit-badge">1.18x faster than Bun</span>
             </div>
             <p>Bundle TypeScript, JSX, CSS for browsers and servers.</p>
             <div class="toolkit-features">
@@ -491,6 +514,15 @@ console.log(<span class="str">'Listening on http://localhost:3000'</span>);</cod
               <td class="best">139ms</td>
               <td>4.08s</td>
               <td>368ms</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Bundler (10K modules)</strong>
+                <span>React JSX, minified + sourcemaps</span>
+              </td>
+              <td class="best">249ms</td>
+              <td>N/A</td>
+              <td>294ms</td>
             </tr>
             <tr>
               <td>
