@@ -83,12 +83,34 @@ Replaced SWC's minifier with howth-parser's `CodegenOptions { minify: true }`. P
 6. **Dense module graph** — `Vec<Module>` indexed by `usize`, no pointer chasing
 7. **In-memory path normalization** — zero realpath() syscalls
 
-## What's next
-
-howth's JS output is currently larger than competitors (3.4 MB vs ~800 KB). This is because we don't yet do identifier mangling — the minifier strips whitespace and comments but preserves original variable names. Mangling is the next optimization target.
-
 ## Methodology
 
 All benchmarks use the [rolldown/benchmarks](https://github.com/jschatz1/benchmarks) suite (forked with howth added). The GCP benchmark ran on a dedicated c3-highcpu-8 spot instance with no other workloads. All tools configured identically. Measured with hyperfine (10 runs).
 
 [View the benchmark source](https://github.com/jschatz1/benchmarks)
+
+---
+
+## Update: v0.5.0 — Variable Name Mangling (February 10, 2026)
+
+v0.5.0 adds variable name mangling to the minifier. `--minify` now shortens local variable names by default (`myVariable` → `a`), matching the behavior of esbuild and bun.
+
+### macOS — Apple M3 Pro (updated)
+
+| Tool | Version | Time | JS Size | vs fastest |
+|------|---------|------|---------|------------|
+| **Bun** | **1.3.9** | **321ms** | **5.34 MB** | **1.0x** |
+| **howth** | **0.5.0** | **460ms** | **4.02 MB** | **1.4x** |
+| esbuild | 0.27.3 | 796ms | 5.91 MB | 2.5x |
+| Rolldown | 1.0.0-rc.3 | 813ms | 5.22 MB | 2.5x |
+| Vite | 7.3.1 | 1,274ms | 5.28 MB | 4.0x |
+| Rsbuild | 1.7.3 | 1,607ms | 5.70 MB | 5.0x |
+| rspack | 1.7.5 | 1,696ms | 5.18 MB | 5.3x |
+
+Mangling adds a re-parse and rename pass, so howth is now **460ms** (up from 276ms without mangling). It's still **1.7x faster than esbuild** and the smallest JS output in the benchmark at **4.02 MB**.
+
+The bundle size dropped **30%** (5.72 MB → 4.02 MB) from mangling alone. There's still a gap vs bun's 5.34 MB — bun doesn't mangle in this configuration, so its output is larger but its bundling is faster.
+
+GCP c3-highcpu-8 results will be updated when the instance is re-provisioned.
+
+See [Removing SWC: Building a Custom TypeScript Parser and Minifier](/blog/removing-swc) for details on how the mangler works.
