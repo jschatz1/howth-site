@@ -200,7 +200,7 @@ main() {
 
             if [ -n "$added_to" ]; then
                 info "Added to PATH in ${added_to}"
-                info "Restart your shell or run: source ~/.zshrc"
+                info "Restart your shell or run: export PATH=\"${INSTALL_DIR}:\$PATH\""
             else
                 info ""
                 info "Add howth to your PATH by adding this to your shell profile:"
