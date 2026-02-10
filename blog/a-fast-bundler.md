@@ -95,6 +95,31 @@ All benchmarks use the [rolldown/benchmarks](https://github.com/jschatz1/benchma
 
 v0.5.0 adds variable name mangling to the minifier. `--minify` now shortens local variable names by default (`myVariable` → `a`), matching the behavior of esbuild and bun.
 
+### GCP c3-highcpu-8 — Linux x64 (updated)
+
+Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM. 10 runs, hyperfine.
+
+**With mangling (default `--minify` behavior):**
+
+| Tool | Version | Time | JS Size | vs fastest |
+|------|---------|------|---------|------------|
+| **Bun** | **1.3.9** | **528ms** | **5.34 MB** | **1.0x** |
+| **howth** | **0.5.0** | **670ms** | **4.13 MB** | **1.3x** |
+| Rolldown | 1.0.0-rc.3 | 1,144ms | 5.22 MB | 2.2x |
+| esbuild | 0.27.3 | 1,248ms | 5.90 MB | 2.4x |
+| Vite | 7.3.1 | 1,498ms | 5.28 MB | 2.8x |
+| Rsbuild | 1.7.3 | 2,550ms | 5.70 MB | 4.8x |
+| rspack | 1.7.5 | 2,676ms | 5.18 MB | 5.1x |
+
+**Without mangling (`--minify --no-mangle`):**
+
+| Tool | Version | Time | JS Size | vs fastest |
+|------|---------|------|---------|------------|
+| **Bun** | **1.3.9** | **528ms** | **5.34 MB** | **1.0x** |
+| **howth** | **0.5.0** | **549ms** | **5.26 MB** | **1.04x** |
+
+Without mangling, howth and bun are neck and neck. Mangling adds a re-parse and rename pass (~120ms overhead) but drops the JS output by **25%** (5.26 MB → 4.13 MB) — the smallest in the benchmark.
+
 ### macOS — Apple M3 Pro (updated)
 
 | Tool | Version | Time | JS Size | vs fastest |
@@ -106,23 +131,5 @@ v0.5.0 adds variable name mangling to the minifier. `--minify` now shortens loca
 | Vite | 7.3.1 | 1,274ms | 5.28 MB | 4.0x |
 | Rsbuild | 1.7.3 | 1,607ms | 5.70 MB | 5.0x |
 | rspack | 1.7.5 | 1,696ms | 5.18 MB | 5.3x |
-
-Mangling adds a re-parse and rename pass, so howth is now **460ms** (up from 276ms without mangling). It's still **1.7x faster than esbuild** and the smallest JS output in the benchmark at **4.02 MB**.
-
-The bundle size dropped **30%** (5.72 MB → 4.02 MB) from mangling alone. There's still a gap vs bun's 5.34 MB — bun doesn't mangle in this configuration, so its output is larger but its bundling is faster.
-
-### GCP c3-highcpu-8 — Linux x64 (updated)
-
-Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM.
-
-| Tool | Version | Time | JS Size | vs fastest |
-|------|---------|------|---------|------------|
-| **Bun** | **1.3.9** | **526ms** | **5.34 MB** | **1.0x** |
-| **howth** | **0.5.0** | **673ms** | **4.13 MB** | **1.3x** |
-| Rolldown | 1.0.0-rc.3 | 1,151ms | 5.22 MB | 2.2x |
-| esbuild | 0.27.3 | 1,243ms | 5.90 MB | 2.4x |
-| Vite | 7.3.1 | 1,501ms | 5.28 MB | 2.9x |
-| Rsbuild | 1.7.3 | 2,599ms | 5.70 MB | 4.9x |
-| rspack | 1.7.5 | 2,677ms | 5.18 MB | 5.1x |
 
 See [Removing SWC: Building a Custom TypeScript Parser and Minifier](/blog/removing-swc) for details on how the mangler works.

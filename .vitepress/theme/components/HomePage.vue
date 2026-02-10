@@ -79,7 +79,6 @@ function copyInstallCommand() {
         <span class="built-label">Built with</span>
         <span class="tech">Rust</span>
         <span class="tech">V8</span>
-        <span class="tech">SWC</span>
         <span class="tech">deno_core</span>
         <span class="tech">hyper</span>
       </div>
@@ -92,53 +91,53 @@ function copyInstallCommand() {
 
       <div class="bar-graph">
         <div class="bar-row winner">
-          <span class="bar-label">howth</span>
-          <div class="bar-track">
-            <div class="bar-fill howth-bar" style="width: 12.7%"></div>
-          </div>
-          <span class="bar-value">275ms</span>
-        </div>
-        <div class="bar-row">
           <span class="bar-label">Bun</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 14.1%"></div>
+            <div class="bar-fill" style="width: 19.7%"></div>
           </div>
-          <span class="bar-value">307ms</span>
+          <span class="bar-value">528ms</span>
         </div>
-        <div class="bar-row">
-          <span class="bar-label">esbuild</span>
+        <div class="bar-row winner">
+          <span class="bar-label">howth</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 27.1%"></div>
+            <div class="bar-fill howth-bar" style="width: 25.0%"></div>
           </div>
-          <span class="bar-value">589ms</span>
+          <span class="bar-value">670ms <small>(4.13 MB)</small></span>
         </div>
         <div class="bar-row">
           <span class="bar-label">Rolldown</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 33.8%"></div>
+            <div class="bar-fill" style="width: 42.8%"></div>
           </div>
-          <span class="bar-value">735ms</span>
+          <span class="bar-value">1,144ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">esbuild</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 46.6%"></div>
+          </div>
+          <span class="bar-value">1,248ms</span>
         </div>
         <div class="bar-row">
           <span class="bar-label">Vite</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 42.4%"></div>
+            <div class="bar-fill" style="width: 56.0%"></div>
           </div>
-          <span class="bar-value">922ms</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">rspack</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: 95.0%"></div>
-          </div>
-          <span class="bar-value">2,067ms</span>
+          <span class="bar-value">1,498ms</span>
         </div>
         <div class="bar-row">
           <span class="bar-label">Rsbuild</span>
           <div class="bar-track">
+            <div class="bar-fill" style="width: 95.3%"></div>
+          </div>
+          <span class="bar-value">2,550ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">rspack</span>
+          <div class="bar-track">
             <div class="bar-fill" style="width: 100%"></div>
           </div>
-          <span class="bar-value">2,176ms</span>
+          <span class="bar-value">2,676ms</span>
         </div>
       </div>
 
@@ -319,7 +318,7 @@ function copyInstallCommand() {
           <div class="toolkit-content">
             <div class="toolkit-header">
               <h3>Bundler</h3>
-              <span class="toolkit-badge">1.12x faster than Bun</span>
+              <span class="toolkit-badge">Smallest output size</span>
             </div>
             <p>Bundle TypeScript, JSX, CSS for browsers and servers.</p>
             <div class="toolkit-features">
@@ -557,9 +556,9 @@ console.log(<span class="str">'Listening on http://localhost:3000'</span>);</cod
                 <strong>Bundler (10K modules)</strong>
                 <span>React JSX, minified + sourcemaps</span>
               </td>
-              <td class="best">275ms</td>
+              <td>670ms</td>
               <td>N/A</td>
-              <td>307ms</td>
+              <td class="best">528ms</td>
             </tr>
             <tr>
               <td>
