@@ -183,16 +183,16 @@ main() {
                 fi
             fi
             if [ "$current_shell" = "bash" ] || [ -f "$HOME/.bashrc" ] || [ -f "$HOME/.bash_profile" ]; then
+                # Prefer .bashrc if it exists, otherwise use .bash_profile
+                # (macOS bash reads .bash_profile for login shells)
                 if [ -f "$HOME/.bashrc" ]; then
-                    if ! grep -qF "$INSTALL_DIR" "$HOME/.bashrc" 2>/dev/null; then
-                        printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bashrc"
-                        added_to="${added_to:+$added_to, }$HOME/.bashrc"
-                    fi
-                elif [ -f "$HOME/.bash_profile" ] || [ "$current_shell" = "bash" ]; then
-                    if ! grep -qF "$INSTALL_DIR" "$HOME/.bash_profile" 2>/dev/null; then
-                        printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bash_profile"
-                        added_to="${added_to:+$added_to, }$HOME/.bash_profile"
-                    fi
+                    bash_target="$HOME/.bashrc"
+                else
+                    bash_target="$HOME/.bash_profile"
+                fi
+                if ! grep -qF "$INSTALL_DIR" "$bash_target" 2>/dev/null; then
+                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$bash_target"
+                    added_to="${added_to:+$added_to, }$bash_target"
                 fi
             fi
             if [ -d "$HOME/.config/fish" ]; then
