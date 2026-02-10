@@ -171,22 +171,28 @@ main() {
             PATH_LINE="export PATH=\"${INSTALL_DIR}:\$PATH\""
             added_to=""
 
-            # Detect shell and append to the appropriate rc file
-            if [ -f "$HOME/.zshrc" ]; then
+            # Detect shell and append to the appropriate rc file.
+            # Use $SHELL to determine the user's default shell, then create
+            # the rc file if it doesn't exist yet (common on fresh macOS).
+            current_shell=$(basename "${SHELL:-}")
+
+            if [ "$current_shell" = "zsh" ] || [ -f "$HOME/.zshrc" ]; then
                 if ! grep -qF "$INSTALL_DIR" "$HOME/.zshrc" 2>/dev/null; then
                     printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.zshrc"
                     added_to="$HOME/.zshrc"
                 fi
             fi
-            if [ -f "$HOME/.bashrc" ]; then
-                if ! grep -qF "$INSTALL_DIR" "$HOME/.bashrc" 2>/dev/null; then
-                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bashrc"
-                    added_to="${added_to:+$added_to, }$HOME/.bashrc"
-                fi
-            elif [ -f "$HOME/.bash_profile" ]; then
-                if ! grep -qF "$INSTALL_DIR" "$HOME/.bash_profile" 2>/dev/null; then
-                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bash_profile"
-                    added_to="${added_to:+$added_to, }$HOME/.bash_profile"
+            if [ "$current_shell" = "bash" ] || [ -f "$HOME/.bashrc" ] || [ -f "$HOME/.bash_profile" ]; then
+                if [ -f "$HOME/.bashrc" ]; then
+                    if ! grep -qF "$INSTALL_DIR" "$HOME/.bashrc" 2>/dev/null; then
+                        printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bashrc"
+                        added_to="${added_to:+$added_to, }$HOME/.bashrc"
+                    fi
+                elif [ -f "$HOME/.bash_profile" ] || [ "$current_shell" = "bash" ]; then
+                    if ! grep -qF "$INSTALL_DIR" "$HOME/.bash_profile" 2>/dev/null; then
+                        printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bash_profile"
+                        added_to="${added_to:+$added_to, }$HOME/.bash_profile"
+                    fi
                 fi
             fi
             if [ -d "$HOME/.config/fish" ]; then
