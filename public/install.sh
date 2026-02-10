@@ -164,18 +164,54 @@ main() {
     info ""
     info "howth installed to ${INSTALL_DIR}"
 
-    # Check if install dir is in PATH
+    # Add to PATH if not already there
     case ":$PATH:" in
         *":${INSTALL_DIR}:"*) ;;
         *)
-            info ""
-            info "Add howth to your PATH by adding this to your shell profile:"
-            info ""
-            info "  export PATH=\"${INSTALL_DIR}:\$PATH\""
-            info ""
+            PATH_LINE="export PATH=\"${INSTALL_DIR}:\$PATH\""
+            added_to=""
+
+            # Detect shell and append to the appropriate rc file
+            if [ -f "$HOME/.zshrc" ]; then
+                if ! grep -qF "$INSTALL_DIR" "$HOME/.zshrc" 2>/dev/null; then
+                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.zshrc"
+                    added_to="$HOME/.zshrc"
+                fi
+            fi
+            if [ -f "$HOME/.bashrc" ]; then
+                if ! grep -qF "$INSTALL_DIR" "$HOME/.bashrc" 2>/dev/null; then
+                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bashrc"
+                    added_to="${added_to:+$added_to, }$HOME/.bashrc"
+                fi
+            elif [ -f "$HOME/.bash_profile" ]; then
+                if ! grep -qF "$INSTALL_DIR" "$HOME/.bash_profile" 2>/dev/null; then
+                    printf '\n# howth\n%s\n' "$PATH_LINE" >> "$HOME/.bash_profile"
+                    added_to="${added_to:+$added_to, }$HOME/.bash_profile"
+                fi
+            fi
+            if [ -d "$HOME/.config/fish" ]; then
+                mkdir -p "$HOME/.config/fish/conf.d"
+                FISH_LINE="fish_add_path ${INSTALL_DIR}"
+                if ! grep -qF "$INSTALL_DIR" "$HOME/.config/fish/conf.d/howth.fish" 2>/dev/null; then
+                    printf '# howth\n%s\n' "$FISH_LINE" > "$HOME/.config/fish/conf.d/howth.fish"
+                    added_to="${added_to:+$added_to, }$HOME/.config/fish/conf.d/howth.fish"
+                fi
+            fi
+
+            if [ -n "$added_to" ]; then
+                info "Added to PATH in ${added_to}"
+                info "Restart your shell or run: source ~/.zshrc"
+            else
+                info ""
+                info "Add howth to your PATH by adding this to your shell profile:"
+                info ""
+                info "  ${PATH_LINE}"
+                info ""
+            fi
             ;;
     esac
 
+    info ""
     info "Run 'howth --version' to verify the installation."
 }
 
