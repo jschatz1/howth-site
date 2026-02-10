@@ -111,6 +111,18 @@ Mangling adds a re-parse and rename pass, so howth is now **460ms** (up from 276
 
 The bundle size dropped **30%** (5.72 MB → 4.02 MB) from mangling alone. There's still a gap vs bun's 5.34 MB — bun doesn't mangle in this configuration, so its output is larger but its bundling is faster.
 
-GCP c3-highcpu-8 results will be updated when the instance is re-provisioned.
+### GCP c3-highcpu-8 — Linux x64 (updated)
+
+Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM.
+
+| Tool | Version | Time | JS Size | vs fastest |
+|------|---------|------|---------|------------|
+| **Bun** | **1.3.9** | **526ms** | **5.34 MB** | **1.0x** |
+| **howth** | **0.5.0** | **673ms** | **4.13 MB** | **1.3x** |
+| Rolldown | 1.0.0-rc.3 | 1,151ms | 5.22 MB | 2.2x |
+| esbuild | 0.27.3 | 1,243ms | 5.90 MB | 2.4x |
+| Vite | 7.3.1 | 1,501ms | 5.28 MB | 2.9x |
+| Rsbuild | 1.7.3 | 2,599ms | 5.70 MB | 4.9x |
+| rspack | 1.7.5 | 2,677ms | 5.18 MB | 5.1x |
 
 See [Removing SWC: Building a Custom TypeScript Parser and Minifier](/blog/removing-swc) for details on how the mangler works.
