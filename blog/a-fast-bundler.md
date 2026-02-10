@@ -133,3 +133,23 @@ Without mangling, howth and bun are neck and neck. Mangling adds a re-parse and 
 | rspack | 1.7.5 | 1,696ms | 5.18 MB | 5.3x |
 
 See [Removing SWC: Building a Custom TypeScript Parser and Minifier](/blog/removing-swc) for details on how the mangler works.
+
+---
+
+## Update: Per-Module Minification (February 10, 2026)
+
+v0.5.0's minifier re-parsed the entire concatenated bundle (~5 MB) as a single pass. This added ~170ms on M3 Pro. The fix: minify and mangle each module inside the existing `par_iter()` loop instead of re-parsing the full bundle. Each module wrapper is only ~500 bytes, so 10,000 parallel parses are near-instant.
+
+### macOS — Apple M3 Pro (updated)
+
+| Tool | Version | Time | JS Size | vs fastest |
+|------|---------|------|---------|------------|
+| **Bun** | **1.3.9** | **315ms** | **5.34 MB** | **1.0x** |
+| **howth** | **0.5.0** | **317ms** | **4.01 MB** | **1.0x** |
+| esbuild | 0.27.3 | 736ms | 5.91 MB | 2.3x |
+| Rolldown | 1.0.0-rc.3 | 799ms | 5.22 MB | 2.5x |
+| Vite | 7.3.1 | 1,229ms | 5.28 MB | 3.9x |
+| Rsbuild | 1.7.3 | 1,569ms | 5.70 MB | 5.0x |
+| rspack | 1.7.5 | 1,646ms | 5.18 MB | 5.2x |
+
+howth and bun are now tied — and howth produces the smallest output (4.01 MB vs 5.34 MB, 25% smaller).

@@ -87,57 +87,57 @@ function copyInstallCommand() {
     <!-- Bundler Benchmark: Horizontal bar graph -->
     <section class="graph-section">
       <h2>Bundler</h2>
-      <p class="section-desc">10,000 React components &mdash; Linux x64 (c3-highcpu-8)</p>
+      <p class="section-desc">10,000 React components &mdash; Apple M3 Pro</p>
 
       <div class="bar-graph">
         <div class="bar-row winner">
           <span class="bar-label">Bun</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 19.7%"></div>
+            <div class="bar-fill" style="width: 19.1%"></div>
           </div>
-          <span class="bar-value">528ms</span>
+          <span class="bar-value">315ms</span>
         </div>
         <div class="bar-row winner">
           <span class="bar-label">howth</span>
           <div class="bar-track">
-            <div class="bar-fill howth-bar" style="width: 25.0%"></div>
+            <div class="bar-fill howth-bar" style="width: 19.3%"></div>
           </div>
-          <span class="bar-value">670ms <small>(4.13 MB)</small></span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">Rolldown</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width: 42.8%"></div>
-          </div>
-          <span class="bar-value">1,144ms</span>
+          <span class="bar-value">317ms <small>(4.01 MB)</small></span>
         </div>
         <div class="bar-row">
           <span class="bar-label">esbuild</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 46.6%"></div>
+            <div class="bar-fill" style="width: 44.7%"></div>
           </div>
-          <span class="bar-value">1,248ms</span>
+          <span class="bar-value">736ms</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Rolldown</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 48.5%"></div>
+          </div>
+          <span class="bar-value">799ms</span>
         </div>
         <div class="bar-row">
           <span class="bar-label">Vite</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width: 56.0%"></div>
+            <div class="bar-fill" style="width: 74.7%"></div>
           </div>
-          <span class="bar-value">1,498ms</span>
+          <span class="bar-value">1,229ms</span>
         </div>
         <div class="bar-row">
           <span class="bar-label">Rsbuild</span>
           <div class="bar-track">
             <div class="bar-fill" style="width: 95.3%"></div>
           </div>
-          <span class="bar-value">2,550ms</span>
+          <span class="bar-value">1,569ms</span>
         </div>
         <div class="bar-row">
           <span class="bar-label">rspack</span>
           <div class="bar-track">
             <div class="bar-fill" style="width: 100%"></div>
           </div>
-          <span class="bar-value">2,676ms</span>
+          <span class="bar-value">1,646ms</span>
         </div>
       </div>
 
@@ -556,9 +556,9 @@ console.log(<span class="str">'Listening on http://localhost:3000'</span>);</cod
                 <strong>Bundler (10K modules)</strong>
                 <span>React JSX, minified + sourcemaps</span>
               </td>
-              <td>670ms</td>
+              <td class="best">317ms</td>
               <td>N/A</td>
-              <td class="best">528ms</td>
+              <td>315ms</td>
             </tr>
             <tr>
               <td>
