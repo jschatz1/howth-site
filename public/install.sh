@@ -199,8 +199,10 @@ main() {
             fi
 
             if [ -n "$added_to" ]; then
+                # Pick the first file we actually wrote to for the source hint
+                source_file=$(printf '%s' "$added_to" | cut -d',' -f1 | tr -d ' ')
                 info "Added to PATH in ${added_to}"
-                info "Restart your shell or run: export PATH=\"${INSTALL_DIR}:\$PATH\""
+                info "Restart your shell or run: source ${source_file}"
             else
                 info ""
                 info "Add howth to your PATH by adding this to your shell profile:"
