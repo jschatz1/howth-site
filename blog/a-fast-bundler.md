@@ -17,7 +17,7 @@ Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM. Warm cache, 
 
 | Tool | Version | Time | vs howth |
 |------|---------|------|----------|
-| **howth** | **0.2.0** | **275ms** | **1.0x** |
+| **howth** | **0.4.0** | **275ms** | **1.0x** |
 | Bun | 1.3.9 | 307ms | 1.1x |
 | esbuild | 0.27.3 | 589ms | 2.1x |
 | Rolldown | 1.0.0-rc.3 | 735ms | 2.7x |
@@ -29,7 +29,7 @@ Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM. Warm cache, 
 
 | Tool | Version | Time | vs howth |
 |------|---------|------|----------|
-| **howth** | **0.2.0** | **276ms** | **1.0x** |
+| **howth** | **0.4.0** | **276ms** | **1.0x** |
 | Bun | 1.3.9 | 350ms | 1.3x |
 | esbuild | 0.27.3 | 724ms | 2.6x |
 | Rolldown | 1.0.0-rc.3 | 765ms | 2.8x |

@@ -5,7 +5,7 @@
 The install script detects your OS and architecture, downloads the appropriate binary, and verifies the checksum:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+curl -fsSL https://howth.run/install.sh | sh
 ```
 
 This installs to `~/.howth/bin` by default. You may need to add it to your PATH:
@@ -19,13 +19,13 @@ export PATH="$HOME/.howth/bin:$PATH"
 Set a specific version:
 
 ```sh
-HOWTH_VERSION=v0.2.0 curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+HOWTH_VERSION=v0.4.0 curl -fsSL https://howth.run/install.sh | sh
 ```
 
 Custom install directory:
 
 ```sh
-HOWTH_INSTALL_DIR=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+HOWTH_INSTALL_DIR=/usr/local/bin curl -fsSL https://howth.run/install.sh | sh
 ```
 
 ### Using wget
@@ -33,7 +33,7 @@ HOWTH_INSTALL_DIR=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/js
 If you don't have `curl`, the install script also supports `wget`:
 
 ```sh
-wget -qO- https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+wget -qO- https://howth.run/install.sh | sh
 ```
 
 ## GitHub Releases
@@ -76,7 +76,7 @@ CMD ["howth", "run", "index.js"]
 
 Available tags:
 - `latest` - Most recent release
-- `0.2.0` - Specific version
+- `0.4.0` - Specific version
 
 ## Build from Source
 
