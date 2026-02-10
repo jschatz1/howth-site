@@ -49,7 +49,7 @@ function copyInstallCommand() {
       </div>
 
       <h1 class="hero-title">
-        The fastest JavaScript toolkit.<br/>
+        A fast JavaScript toolkit.<br/>
         <span class="hero-subtitle">Runtime. Bundler. Test runner. One binary.</span>
       </h1>
 
