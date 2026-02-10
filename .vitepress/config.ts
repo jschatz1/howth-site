@@ -57,6 +57,7 @@ export default defineConfig({
         {
           text: "Blog",
           items: [
+            { text: "Removing SWC", link: "/blog/removing-swc" },
             { text: "A Fast Bundler", link: "/blog/a-fast-bundler" },
           ],
         },

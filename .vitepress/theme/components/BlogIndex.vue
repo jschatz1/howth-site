@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const posts = [
   {
+    title: 'Removing SWC: Building a Custom TypeScript Parser and Minifier',
+    date: '2026-02-10',
+    description: 'Why we replaced SWC with a hand-written TypeScript parser, JSX transform, and variable name mangler — all in ~17k lines of Rust.',
+    link: '/blog/removing-swc',
+  },
+  {
     title: 'A Fast Bundler',
     date: '2026-02-09',
     description: 'howth came out on top in the rolldown/benchmarks suite against bun, esbuild, rolldown, vite, rspack, and rsbuild.',
