@@ -140,6 +140,20 @@ See [Removing SWC: Building a Custom TypeScript Parser and Minifier](/blog/remov
 
 v0.5.0's minifier re-parsed the entire concatenated bundle (~5 MB) as a single pass. This added ~170ms on M3 Pro. The fix: minify and mangle each module inside the existing `par_iter()` loop instead of re-parsing the full bundle. Each module wrapper is only ~500 bytes, so 10,000 parallel parses are near-instant.
 
+### GCP c3-highcpu-8 — Linux x64 (updated)
+
+Intel Xeon Platinum 8481C @ 2.70GHz, 4 cores / 8 threads, 16GB RAM. 10 runs, hyperfine.
+
+| Tool | Version | Time | JS Size | vs howth |
+|------|---------|------|---------|----------|
+| **howth** | **0.5.0** | **290ms** | **4.12 MB** | **1.0x** |
+| Bun | 1.3.9 | 541ms | 5.34 MB | 1.9x |
+| esbuild | 0.27.3 | 1,090ms | 5.90 MB | 3.8x |
+| Rolldown | 1.0.0-rc.3 | 1,179ms | 5.22 MB | 4.1x |
+| Vite | 7.3.1 | 1,530ms | 5.28 MB | 5.3x |
+| Rsbuild | 1.7.3 | 2,775ms | 5.70 MB | 9.6x |
+| rspack | 1.7.5 | 2,930ms | 5.18 MB | 10.1x |
+
 ### macOS — Apple M3 Pro (updated)
 
 | Tool | Version | Time | JS Size | vs fastest |
@@ -152,4 +166,4 @@ v0.5.0's minifier re-parsed the entire concatenated bundle (~5 MB) as a single p
 | Rsbuild | 1.7.3 | 1,569ms | 5.70 MB | 5.0x |
 | rspack | 1.7.5 | 1,646ms | 5.18 MB | 5.2x |
 
-howth and bun are now tied — and howth produces the smallest output (4.01 MB vs 5.34 MB, 25% smaller).
+**1.86x faster than Bun on C3**, tied on M3 Pro. howth produces the smallest output in both benchmarks (4 MB vs 5.3 MB, 23% smaller).
