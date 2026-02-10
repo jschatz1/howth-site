@@ -74,7 +74,7 @@ get_latest_version() {
 
     VERSION=$(fetch "https://api.github.com/repos/${REPO}/releases/latest" \
         | grep '"tag_name"' \
-        | sed -E 's/.*"tag_name":\s*"([^"]+)".*/\1/')
+        | sed -E 's/.*"tag_name": *"([^"]+)".*/\1/')
 
     if [ -z "$VERSION" ]; then
         error "Could not determine latest version. Set HOWTH_VERSION to install a specific version."
