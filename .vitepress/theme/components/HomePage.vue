@@ -18,7 +18,7 @@ const apis = [
 
 function copyInstallCommand() {
   const cmd = installTab.value === 'unix'
-    ? 'curl -fsSL https://howth.run/install | sh'
+    ? 'curl -fsSL https://howth.run/install.sh | sh'
     : 'powershell -c "irm howth.run/install.ps1 | iex"'
   navigator.clipboard.writeText(cmd)
 }
@@ -65,7 +65,7 @@ function copyInstallCommand() {
         </div>
         <div class="install-cmd">
           <span class="prompt">$</span>
-          <code>{{ installTab === 'unix' ? 'curl -fsSL https://howth.run/install | sh' : 'powershell -c "irm howth.run/install.ps1 | iex"' }}</code>
+          <code>{{ installTab === 'unix' ? 'curl -fsSL https://howth.run/install.sh | sh' : 'powershell -c "irm howth.run/install.ps1 | iex"' }}</code>
           <button class="copy-btn" @click="copyInstallCommand">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="9" y="9" width="13" height="13" rx="2"></rect>
@@ -623,7 +623,7 @@ console.log(<span class="str">'Listening on http://localhost:3000'</span>);</cod
           <span class="terminal-dot"></span>
         </div>
         <pre><code><span class="comment"># Install howth</span>
-curl -fsSL https://howth.run/install | sh
+curl -fsSL https://howth.run/install.sh | sh
 
 <span class="comment"># Run your tests with howth (works with Jest syntax)</span>
 howth test

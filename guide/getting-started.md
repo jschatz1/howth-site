@@ -9,7 +9,7 @@ Instead of stitching together `tsc` + `jest` + `webpack` + `nodemon` + `npm`, yo
 The fastest way to install howth:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+curl -fsSL https://howth.run/install.sh | sh
 ```
 
 See [Installation](./installation) for more options.

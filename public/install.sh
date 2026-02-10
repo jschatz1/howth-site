@@ -1,6 +1,6 @@
 #!/bin/sh
 # Install script for howth
-# Usage: curl -fsSL https://raw.githubusercontent.com/jschatz1/howth/main/install.sh | sh
+# Usage: curl -fsSL https://howth.run/install.sh | sh
 
 set -e
 
