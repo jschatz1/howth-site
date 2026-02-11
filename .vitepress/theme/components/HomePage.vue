@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const installMethod = ref<'shell' | 'npm'>('npm')
+const installMethod = ref<'shell' | 'npm'>('shell')
 const installTab = ref<'unix' | 'windows'>('unix')
 const activeApi = ref('http-server')
 
