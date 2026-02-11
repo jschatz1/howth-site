@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const installMethod = ref<'shell' | 'npm'>('shell')
 const installTab = ref<'unix' | 'windows'>('unix')
 const activeApi = ref('http-server')
 
@@ -16,11 +17,15 @@ const apis = [
   'Run a shell script',
 ]
 
-function copyInstallCommand() {
-  const cmd = installTab.value === 'unix'
+function currentInstallCommand() {
+  if (installMethod.value === 'npm') return 'npm install -g howth'
+  return installTab.value === 'unix'
     ? 'curl -fsSL https://howth.run/install.sh | sh'
     : 'powershell -c "irm howth.run/install.ps1 | iex"'
-  navigator.clipboard.writeText(cmd)
+}
+
+function copyInstallCommand() {
+  navigator.clipboard.writeText(currentInstallCommand())
 }
 </script>
 
@@ -59,13 +64,17 @@ function copyInstallCommand() {
       </p>
 
       <div class="install-box">
-        <div class="install-tabs">
+        <div class="install-method-tabs">
+          <button :class="{ active: installMethod === 'shell' }" @click="installMethod = 'shell'">Shell</button>
+          <button :class="{ active: installMethod === 'npm' }" @click="installMethod = 'npm'">npm</button>
+        </div>
+        <div v-if="installMethod === 'shell'" class="install-tabs">
           <button :class="{ active: installTab === 'unix' }" @click="installTab = 'unix'">Linux & macOS</button>
           <button :class="{ active: installTab === 'windows' }" @click="installTab = 'windows'">Windows</button>
         </div>
         <div class="install-cmd">
           <span class="prompt">$</span>
-          <code>{{ installTab === 'unix' ? 'curl -fsSL https://howth.run/install.sh | sh' : 'powershell -c "irm howth.run/install.ps1 | iex"' }}</code>
+          <code>{{ currentInstallCommand() }}</code>
           <button class="copy-btn" @click="copyInstallCommand">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="9" y="9" width="13" height="13" rx="2"></rect>

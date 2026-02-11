@@ -161,6 +161,35 @@
   margin: 0 auto 2rem;
 }
 
+.install-method-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.install-method-tabs button {
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.install-method-tabs button:hover {
+  color: var(--text-muted);
+}
+
+.install-method-tabs button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 .install-tabs {
   display: flex;
   border-bottom: 1px solid var(--border);
@@ -193,7 +222,6 @@
   gap: 0.5rem;
   background: var(--bg-alt);
   border: 1px solid var(--border);
-  border-top: none;
   padding: 0.875rem 1rem;
   font-family: 'JetBrains Mono', 'SF Mono', monospace;
   font-size: 0.8125rem;
