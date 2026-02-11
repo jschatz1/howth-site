@@ -18,7 +18,7 @@ const apis = [
 ]
 
 function currentInstallCommand() {
-  if (installMethod.value === 'npm') return 'npm install -g howth'
+  if (installMethod.value === 'npm') return 'npx howth'
   return installTab.value === 'unix'
     ? 'curl -fsSL https://howth.run/install.sh | sh'
     : 'powershell -c "irm howth.run/install.ps1 | iex"'
